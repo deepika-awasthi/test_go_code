@@ -1,3 +1,7 @@
+Tried using a context propagator, but it passes the data in the header for the entire schedule and uses the same headers for every workflow. Additionally, we need to explicitly add those headers to workflows for them to appear in traces. Also tried using the memo in the schedule definition, but it didn't work as expected.
+
+As a workaround, we manually created traces, set attributes, and assigned tracking identifiers to workflow and activity traces. This way, if there are four workflows running in one schedule at a time, there will be four separate identifiers for the schedule, allowing us to track the workflows and activities independently.
+
 ### Steps to run this sample:
 1) Run a [Temporal service](https://github.com/temporalio/samples-go/tree/main/#how-to-use).
 
@@ -49,4 +53,4 @@ OTEL_EXPORTER_OTLP_HEADERS
 
 As an example this is what is the rendered by Honeycomb.io.  
 
-![Honeycomb.io](honeycomb_traces.png)
+![Honeycomb.io](traces.png)
